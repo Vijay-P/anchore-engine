@@ -991,7 +991,9 @@ class ExecutableWhitelistItem(object):
         expires_on_str = item_json.get("expires_on", "")
         if expires_on_str:
             try:
-                self.expires_on = rfc3339str_to_datetime(expires_on_str)
+                self.expires_on = rfc3339str_to_datetime(
+                    expires_on_str, field_name="expires_on"
+                )
             except Exception as err:
                 logger.exception("Failed to parse")
                 raise err

@@ -360,15 +360,16 @@ rfc3339_date_input_fmts = [
 ]
 
 
-def rfc3339str_to_epoch(rfc3339_str):
-    return int(rfc3339str_to_datetime(rfc3339_str).timestamp())
+def rfc3339str_to_epoch(rfc3339_str, field_name=""):
+    return int(rfc3339str_to_datetime(rfc3339_str, field_name).timestamp())
 
 
-def rfc3339str_to_datetime(rfc3339_str):
+def rfc3339str_to_datetime(rfc3339_str, field_name=""):
     """
     Convert the rfc3339 formatted string (UTC only) to a datatime object with tzinfo explicitly set to utc. Raises an exception if the parsing fails.
 
     :param rfc3339_str:
+    :param field_name: the name of the field being converted
     :return:
     """
 
@@ -385,8 +386,8 @@ def rfc3339str_to_datetime(rfc3339_str):
 
     if ret is None:
         raise Exception(
-            "could not convert input created_at value ({}) into datetime using formats in {}".format(
-                rfc3339_str, rfc3339_date_input_fmts
+            "could not convert input {} value ({}) into datetime using formats in {}".format(
+                field_name, rfc3339_str, rfc3339_date_input_fmts
             )
         )
 

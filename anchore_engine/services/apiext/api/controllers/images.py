@@ -1326,7 +1326,9 @@ def analyze_image(
                 ts = img_source.get("creation_timestamp_override")
                 if ts:
                     try:
-                        ts = utils.rfc3339str_to_epoch(ts)
+                        ts = utils.rfc3339str_to_epoch(
+                            ts, field_name="creation_timestamp_override"
+                        )
                     except Exception as err:
                         raise api_exceptions.InvalidDateFormat(
                             "source.creation_timestamp_override", ts
